@@ -7,6 +7,9 @@ import { useState } from "react";
 // import dispatch to enable reducer dispatch
 import { useDispatch } from "react-redux";
 
+// import mui components
+import { Button, Slider } from "@mui/material";
+
 function Form({ formType }) {
   // history constant
   const history = useHistory();
@@ -26,27 +29,23 @@ function Form({ formType }) {
   switch (formType) {
     case "feeling":
       headerText = "How are you feeling today?";
-      labelText = "Feeling (1-5):";
       dispatchType = "SET_FEELING";
       nextPath = "/understanding";
       break;
     case "understanding":
       headerText = "How well are you understanding the content?";
-      labelText = "Understanding (1-5):";
       dispatchType = "SET_UNDERSTANDING";
       prevPath = "/";
       nextPath = "/support";
       break;
     case "support":
       headerText = "How well are you feeling supported in your learning?";
-      labelText = "Support (1-5):";
       dispatchType = "SET_SUPPORT";
       prevPath = "/understanding";
       nextPath = "/comments";
       break;
     case "comments":
       headerText = "Any additional comments you'd like to add?";
-      labelText = "Comments:";
       dispatchType = "SET_COMMENTS";
       prevPath = "/support";
       nextPath = "/review";
@@ -56,7 +55,7 @@ function Form({ formType }) {
   }
 
   // form input value
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(3);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -78,17 +77,32 @@ function Form({ formType }) {
     <>
       <h3>{headerText}</h3>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="rating-input">{labelText}</label>
-        <input
-          type={inputType}
-          onChange={(e) => setInputValue(e.target.value)}
-          value={inputValue}
-          min="1"
-          max="5"
-          name="rating-input"
-        />
-        {prevPath && <button onClick={handleBackClick}>BACK</button>}
-        <button type="submit">NEXT</button>
+        {inputType === "number" ? (
+          <Slider
+            sx={{ width: "25%" }}
+            aria-label={labelText}
+            defaultValue={3}
+            step={1}
+            marks={[
+              { value: 1, label: 1 },
+              { value: 2, label: 2 },
+              { value: 3, label: 3 },
+              { value: 4, label: 4 },
+              { value: 5, label: 5 },
+            ]}
+            valueLabelDisplay="auto"
+            min={1}
+            max={5}
+            width={100}
+            onChange={(e) => setInputValue(e.target.value)}
+            value={Number(inputValue)}
+          />
+        ) : (
+          <input type="text" />
+        )}
+
+        {prevPath && <Button onClick={handleBackClick}>BACK</Button>}
+        <Button type="submit">NEXT</Button>
       </form>
     </>
   );

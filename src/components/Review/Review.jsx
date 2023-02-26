@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 
 import { useHistory } from "react-router-dom";
 
+import { Button } from "@mui/material";
+
 import axios from "axios";
 
 function Review() {
@@ -28,8 +30,8 @@ function Review() {
       <p>Understanding: {feedback.understanding}</p>
       <p>Support: {feedback.support}</p>
       <p>Comments: {feedback.comments}</p>
-      <button onClick={handleBackClick}>BACK</button>
-      <button onClick={handleClick}>SUBMIT</button>
+      <Button onClick={handleBackClick}>BACK</Button>
+      <Button onClick={handleClick}>SUBMIT</Button>
     </div>
   );
 }
