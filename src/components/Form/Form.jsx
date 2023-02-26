@@ -82,7 +82,7 @@ function Form({ formType }) {
     if (inputType === "text") {
       setInputValue("");
     }
-  });
+  }, []);
 
   return (
     <>
@@ -100,6 +100,7 @@ function Form({ formType }) {
               min={1}
               max={5}
               width={100}
+              color="primary"
               onChange={(e) => setInputValue(e.target.value)}
               value={Number(inputValue)}
             />
