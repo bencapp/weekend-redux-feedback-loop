@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 // import mui components
-import { Button, Slider } from "@mui/material";
+import { Button, Slider, TextField } from "@mui/material";
 
 function Form({ formType }) {
   // history constant
@@ -73,6 +73,15 @@ function Form({ formType }) {
     history.push(prevPath);
   };
 
+  // marks array for slider component
+  const marks = [
+    { value: 1, label: 1 },
+    { value: 2, label: 2 },
+    { value: 3, label: 3 },
+    { value: 4, label: 4 },
+    { value: 5, label: 5 },
+  ];
+
   return (
     <>
       <h3>{headerText}</h3>
@@ -83,13 +92,7 @@ function Form({ formType }) {
             aria-label={labelText}
             defaultValue={3}
             step={1}
-            marks={[
-              { value: 1, label: 1 },
-              { value: 2, label: 2 },
-              { value: 3, label: 3 },
-              { value: 4, label: 4 },
-              { value: 5, label: 5 },
-            ]}
+            marks={marks}
             valueLabelDisplay="auto"
             min={1}
             max={5}
@@ -98,7 +101,11 @@ function Form({ formType }) {
             value={Number(inputValue)}
           />
         ) : (
-          <input type="text" />
+          <TextField
+            label="Comments"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
         )}
 
         {prevPath && <Button onClick={handleBackClick}>BACK</Button>}
