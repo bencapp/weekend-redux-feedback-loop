@@ -2,22 +2,12 @@
   text-align: center;
 }
 
-.App-header {
-  background-color: #033076;
-  min-height: 70px;
-  padding: 20px;
-  color: white;
-  margin-bottom: 20px;
-}
-
 .App-title {
   font-size: 2em;
+  margin: 20px;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-h4 {
+.App-subtitle {
   font-style: italic;
+  margin-top: 0px;
 }
