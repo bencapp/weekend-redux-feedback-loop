@@ -7,6 +7,8 @@ import { HashRouter as Router, Route } from "react-router-dom";
 
 // Import other components
 import Form from "../Form/Form";
+import Review from "../Review/Review";
+import Success from "../Success/Success";
 
 function App() {
   return (
@@ -16,19 +18,24 @@ function App() {
           <h1 className="App-title">Feedback!</h1>
           <h4>Don't forget it!</h4>
         </header>
-        <Route path="/">
-          <Form />
+        <Route path="/" exact>
+          <Form formType={"feeling"} />
         </Route>
-        <Route path="/understanding">
-          <Form />
+        <Route path="/understanding" exact>
+          <Form formType={"understanding"} />
         </Route>
-        <Route path="/support">
-          <Form />
+        <Route path="/support" exact>
+          <Form formType={"support"} />
         </Route>
-        <Route path="/comments">
-          <Form />
+        <Route path="/comments" exact>
+          <Form formType={"comments"} />
         </Route>
-        <Route path="/review">{/* <Review /> */}</Route>
+        <Route path="/review" exact>
+          <Review />
+        </Route>
+        <Route path="/success" exact>
+          <Success />
+        </Route>
       </Router>
     </div>
   );
