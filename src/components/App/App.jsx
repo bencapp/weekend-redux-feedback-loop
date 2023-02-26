@@ -16,19 +16,21 @@ function App() {
           <h1 className="App-title">Feedback!</h1>
           <h4>Don't forget it!</h4>
         </header>
-        <Route path="/">
-          <Form />
+        <Route path="/" exact>
+          <Form formType={"feeling"} />
         </Route>
-        <Route path="/understanding">
-          <Form />
+        <Route path="/understanding" exact>
+          <Form formType={"understanding"} />
         </Route>
-        <Route path="/support">
-          <Form />
+        <Route path="/support" exact>
+          <Form formType={"support"} />
         </Route>
-        <Route path="/comments">
-          <Form />
+        <Route path="/comments" exact>
+          <Form formType={"comments"} />
         </Route>
-        <Route path="/review">{/* <Review /> */}</Route>
+        <Route path="/review" exact>
+          {/* <Review /> */}
+        </Route>
       </Router>
     </div>
   );
