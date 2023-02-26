@@ -17,6 +17,11 @@ const theme = createTheme({
         variant: "contained",
       },
     },
+    MuiButtonGroup: {
+      defaultProps: {
+        variant: "contained",
+      },
+    },
   },
 });
 

@@ -11,3 +11,27 @@
   font-style: italic;
   margin-top: 0px;
 }
+
+.paper {
+  margin: auto;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+h3 {
+  margin: 0px;
+  margin-bottom: 15px;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-group {
+  align-self: end;
+}

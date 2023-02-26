@@ -8,14 +8,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 // import mui components
-import {
-  Button,
-  Slider,
-  TextField,
-  Paper,
-  Snackbar,
-  Alert,
-} from "@mui/material";
+import { Button, ButtonGroup, Slider, TextField, Paper } from "@mui/material";
 
 function Form({ formType }) {
   // history constant
@@ -93,9 +86,9 @@ function Form({ formType }) {
 
   return (
     <>
-      <Paper elevation={3}>
+      <Paper className="paper" elevation={3}>
         <h3>{headerText}</h3>
-        <form onSubmit={handleSubmit}>
+        <form className="feedback-form" onSubmit={handleSubmit}>
           {inputType === "number" ? (
             <Slider
               sx={{ width: "25%" }}
@@ -112,14 +105,26 @@ function Form({ formType }) {
             />
           ) : (
             <TextField
+              sx={{
+                marginTop: "5px",
+                marginBottom: "20px",
+                width: "350px",
+              }}
               label="Comments"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
           )}
-
-          {prevPath && <Button onClick={handleBackClick}>BACK</Button>}
-          <Button type="submit">NEXT</Button>
+          <ButtonGroup className="button-group">
+            {prevPath && (
+              <Button variant="contained" onClick={handleBackClick}>
+                BACK
+              </Button>
+            )}
+            <Button variant="contained" type="submit">
+              NEXT
+            </Button>
+          </ButtonGroup>
         </form>
       </Paper>
     </>
