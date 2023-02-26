@@ -12,7 +12,10 @@ function Review() {
     //TODO: post information to the database
     history.push("/success");
 
-    axios.post("/");
+    axios
+      .post("/feedback", feedback)
+      .then()
+      .catch((err) => console.log("Error in client POST:", err));
   };
   return (
     <div>
