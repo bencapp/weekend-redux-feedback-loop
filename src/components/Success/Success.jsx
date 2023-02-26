@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
-import { Button } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 
 function Success() {
   const history = useHistory();
@@ -13,10 +13,10 @@ function Success() {
     history.push("/");
   };
   return (
-    <div>
+    <Paper elevation={3} className="paper">
       <h3>Your feedback has been submitted!</h3>
       <Button onClick={handleClick}>Leave New Review</Button>
-    </div>
+    </Paper>
   );
 }
 
