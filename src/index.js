@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import logger from "redux-logger";
 
 // create form reducer
-const formData = (state = {}, action) => {
+const feedback = (state = {}, action) => {
   switch (action.type) {
     case "SET_FEELING":
       return { ...state, feeling: action.payload };
@@ -25,7 +25,7 @@ const formData = (state = {}, action) => {
 
 // create store
 const store = createStore(
-  combineReducers({ formData }),
+  combineReducers({ feedback }),
   applyMiddleware(logger)
 );
 

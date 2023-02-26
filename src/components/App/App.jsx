@@ -7,6 +7,7 @@ import { HashRouter as Router, Route } from "react-router-dom";
 
 // Import other components
 import Form from "../Form/Form";
+import Review from "../Review/Review";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
           <Form formType={"comments"} />
         </Route>
         <Route path="/review" exact>
-          {/* <Review /> */}
+          <Review />
         </Route>
       </Router>
     </div>
