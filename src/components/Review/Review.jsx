@@ -9,7 +9,6 @@ function Review() {
   const feedback = useSelector((store) => store.feedback);
 
   const handleClick = () => {
-    //TODO: post information to the database
     history.push("/success");
 
     axios
@@ -17,6 +16,7 @@ function Review() {
       .then()
       .catch((err) => console.log("Error in client POST:", err));
   };
+
   return (
     <div>
       <h3>Review Your Feedback</h3>
