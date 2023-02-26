@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 
 import { useHistory } from "react-router-dom";
 
+import { Button, ButtonGroup, Paper } from "@mui/material";
+
 import axios from "axios";
 
 function Review() {
@@ -22,15 +24,17 @@ function Review() {
   };
 
   return (
-    <div>
+    <Paper elevation={3} className="paper">
       <h3>Review Your Feedback</h3>
-      <p>Feelings: {feedback.feeling}</p>
-      <p>Understanding: {feedback.understanding}</p>
-      <p>Support: {feedback.support}</p>
+      <p>Feelings: {feedback.feeling}/5</p>
+      <p>Understanding: {feedback.understanding}/5</p>
+      <p>Support: {feedback.support}/5</p>
       <p>Comments: {feedback.comments}</p>
-      <button onClick={handleBackClick}>BACK</button>
-      <button onClick={handleClick}>SUBMIT</button>
-    </div>
+      <ButtonGroup>
+        <Button onClick={handleBackClick}>BACK</Button>
+        <Button onClick={handleClick}>SUBMIT</Button>
+      </ButtonGroup>
+    </Paper>
   );
 }
 

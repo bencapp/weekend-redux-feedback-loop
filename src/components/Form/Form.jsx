@@ -2,10 +2,13 @@
 import { useHistory } from "react-router-dom";
 
 // import state to enable inputValue rendering
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // import dispatch to enable reducer dispatch
 import { useDispatch } from "react-redux";
+
+// import mui components
+import { Button, ButtonGroup, Slider, TextField, Paper } from "@mui/material";
 
 function Form({ formType }) {
   // history constant
@@ -26,27 +29,23 @@ function Form({ formType }) {
   switch (formType) {
     case "feeling":
       headerText = "How are you feeling today?";
-      labelText = "Feeling (1-5):";
       dispatchType = "SET_FEELING";
       nextPath = "/understanding";
       break;
     case "understanding":
       headerText = "How well are you understanding the content?";
-      labelText = "Understanding (1-5):";
       dispatchType = "SET_UNDERSTANDING";
       prevPath = "/";
       nextPath = "/support";
       break;
     case "support":
       headerText = "How well are you feeling supported in your learning?";
-      labelText = "Support (1-5):";
       dispatchType = "SET_SUPPORT";
       prevPath = "/understanding";
       nextPath = "/comments";
       break;
     case "comments":
       headerText = "Any additional comments you'd like to add?";
-      labelText = "Comments:";
       dispatchType = "SET_COMMENTS";
       prevPath = "/support";
       nextPath = "/review";
@@ -56,40 +55,79 @@ function Form({ formType }) {
   }
 
   // form input value
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(3);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // if there is a value in the input field and it is required for this page,
-    // store data in reducer and move to the next page
-    if (inputValue || !requiredBool) {
-      //TODO: save input data to reducer
-      dispatch({ type: dispatchType, payload: inputValue });
-      history.push(nextPath);
-    }
+    dispatch({ type: dispatchType, payload: inputValue });
+    history.push(nextPath);
   };
 
   const handleBackClick = () => {
     history.push(prevPath);
   };
 
+  // marks array for slider component
+  const marks = [
+    { value: 1, label: 1 },
+    { value: 2, label: 2 },
+    { value: 3, label: 3 },
+    { value: 4, label: 4 },
+    { value: 5, label: 5 },
+  ];
+
+  // on render, make sure that the text input field is initially blank
+  useEffect(() => {
+    if (inputType === "text") {
+      setInputValue("");
+    }
+  }, []);
+
   return (
     <>
-      <h3>{headerText}</h3>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="rating-input">{labelText}</label>
-        <input
-          type={inputType}
-          onChange={(e) => setInputValue(e.target.value)}
-          value={inputValue}
-          min="1"
-          max="5"
-          name="rating-input"
-        />
-        {prevPath && <button onClick={handleBackClick}>BACK</button>}
-        <button type="submit">NEXT</button>
-      </form>
+      <Paper className="paper" elevation={3}>
+        <h3>{headerText}</h3>
+        <form className="feedback-form" onSubmit={handleSubmit}>
+          {inputType === "number" ? (
+            <Slider
+              sx={{ width: "25%" }}
+              aria-label={labelText}
+              defaultValue={3}
+              step={1}
+              marks={marks}
+              valueLabelDisplay="auto"
+              min={1}
+              max={5}
+              width={100}
+              color="primary"
+              onChange={(e) => setInputValue(e.target.value)}
+              value={Number(inputValue)}
+            />
+          ) : (
+            <TextField
+              sx={{
+                marginTop: "5px",
+                marginBottom: "20px",
+                width: "350px",
+              }}
+              label="Comments"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+          )}
+          <ButtonGroup className="button-group">
+            {prevPath && (
+              <Button variant="contained" onClick={handleBackClick}>
+                BACK
+              </Button>
+            )}
+            <Button variant="contained" type="submit">
+              NEXT
+            </Button>
+          </ButtonGroup>
+        </form>
+      </Paper>
     </>
   );
 }
