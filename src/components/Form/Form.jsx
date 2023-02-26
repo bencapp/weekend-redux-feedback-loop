@@ -2,13 +2,20 @@
 import { useHistory } from "react-router-dom";
 
 // import state to enable inputValue rendering
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // import dispatch to enable reducer dispatch
 import { useDispatch } from "react-redux";
 
 // import mui components
-import { Button, Slider, TextField } from "@mui/material";
+import {
+  Button,
+  Slider,
+  TextField,
+  Paper,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 
 function Form({ formType }) {
   // history constant
@@ -60,13 +67,8 @@ function Form({ formType }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // if there is a value in the input field and it is required for this page,
-    // store data in reducer and move to the next page
-    if (inputValue || !requiredBool) {
-      //TODO: save input data to reducer
-      dispatch({ type: dispatchType, payload: inputValue });
-      history.push(nextPath);
-    }
+    dispatch({ type: dispatchType, payload: inputValue });
+    history.push(nextPath);
   };
 
   const handleBackClick = () => {
@@ -82,35 +84,44 @@ function Form({ formType }) {
     { value: 5, label: 5 },
   ];
 
+  // on render, make sure that the text input field is initially blank
+  useEffect(() => {
+    if (inputType === "text") {
+      setInputValue("");
+    }
+  });
+
   return (
     <>
-      <h3>{headerText}</h3>
-      <form onSubmit={handleSubmit}>
-        {inputType === "number" ? (
-          <Slider
-            sx={{ width: "25%" }}
-            aria-label={labelText}
-            defaultValue={3}
-            step={1}
-            marks={marks}
-            valueLabelDisplay="auto"
-            min={1}
-            max={5}
-            width={100}
-            onChange={(e) => setInputValue(e.target.value)}
-            value={Number(inputValue)}
-          />
-        ) : (
-          <TextField
-            label="Comments"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-        )}
+      <Paper elevation={3}>
+        <h3>{headerText}</h3>
+        <form onSubmit={handleSubmit}>
+          {inputType === "number" ? (
+            <Slider
+              sx={{ width: "25%" }}
+              aria-label={labelText}
+              defaultValue={3}
+              step={1}
+              marks={marks}
+              valueLabelDisplay="auto"
+              min={1}
+              max={5}
+              width={100}
+              onChange={(e) => setInputValue(e.target.value)}
+              value={Number(inputValue)}
+            />
+          ) : (
+            <TextField
+              label="Comments"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+          )}
 
-        {prevPath && <Button onClick={handleBackClick}>BACK</Button>}
-        <Button type="submit">NEXT</Button>
-      </form>
+          {prevPath && <Button onClick={handleBackClick}>BACK</Button>}
+          <Button type="submit">NEXT</Button>
+        </form>
+      </Paper>
     </>
   );
 }
