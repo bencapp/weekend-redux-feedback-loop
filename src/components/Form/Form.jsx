@@ -18,6 +18,7 @@ function Form({ formType }) {
   let labelText = "";
   let inputType = "number";
   let dispatchType = "";
+  let prevPath = "";
   let nextPath = "";
   let requiredBool = true;
 
@@ -33,18 +34,21 @@ function Form({ formType }) {
       headerText = "How well are you understanding the content?";
       labelText = "Understanding (1-5):";
       dispatchType = "SET_UNDERSTANDING";
+      prevPath = "/";
       nextPath = "/support";
       break;
     case "support":
       headerText = "How well are you feeling supported in your learning?";
       labelText = "Support (1-5):";
       dispatchType = "SET_SUPPORT";
+      prevPath = "/understanding";
       nextPath = "/comments";
       break;
     case "comments":
       headerText = "Any additional comments you'd like to add?";
       labelText = "Comments:";
       dispatchType = "SET_COMMENTS";
+      prevPath = "/support";
       nextPath = "/review";
       inputType = "text";
       requiredBool = false;
@@ -66,6 +70,10 @@ function Form({ formType }) {
     }
   };
 
+  const handleBackClick = () => {
+    history.push(prevPath);
+  };
+
   return (
     <>
       <h3>{headerText}</h3>
@@ -79,6 +87,7 @@ function Form({ formType }) {
           max="5"
           name="rating-input"
         />
+        {prevPath && <button onClick={handleBackClick}>BACK</button>}
         <button type="submit">NEXT</button>
       </form>
     </>

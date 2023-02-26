@@ -17,6 +17,10 @@ function Review() {
       .catch((err) => console.log("Error in client POST:", err));
   };
 
+  const handleBackClick = () => {
+    history.push("/comments");
+  };
+
   return (
     <div>
       <h3>Review Your Feedback</h3>
@@ -24,6 +28,7 @@ function Review() {
       <p>Understanding: {feedback.understanding}</p>
       <p>Support: {feedback.support}</p>
       <p>Comments: {feedback.comments}</p>
+      <button onClick={handleBackClick}>BACK</button>
       <button onClick={handleClick}>SUBMIT</button>
     </div>
   );
