@@ -8,6 +8,7 @@ import { HashRouter as Router, Route } from "react-router-dom";
 // Import other components
 import Form from "../Form/Form";
 import Review from "../Review/Review";
+import Success from "../Success/Success";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
         </Route>
         <Route path="/review" exact>
           <Review />
+        </Route>
+        <Route path="/success" exact>
+          <Success />
         </Route>
       </Router>
     </div>
